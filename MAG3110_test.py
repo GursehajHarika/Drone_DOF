@@ -3,11 +3,13 @@
 # MAG3110
 # This code is designed to work with the MAG3110_I2CS I2C Mini Module available from ControlEverything.com.
 # https://www.controleverything.com/content/Compass?sku=MAG3110_I2CS#tabs-0-product_tabset-2
-
+import time
+import calendar
 import smbus
 import time
 import json
 from firebase import firebase
+
 # Get I2C bus
 bus = smbus.SMBus(1)
 
@@ -24,6 +26,7 @@ time.sleep(0.5)
 data = bus.read_i2c_block_data(0x0E, 0x01, 6)
 
 # Convert the data
+
 xMag = data[0] * 256 + data[1]
 if xMag > 32767 :
 	xMag -= 65536
@@ -40,6 +43,14 @@ if zMag > 32767 :
 print "Magnetic field in X-Axis : %d" %xMag
 print "Magnetic field in Y-Axis : %d" %yMag
 print "Magnetic field in Z-Axis : %d" %zMag
+
+
+#Time in EPOCH
+ts = calendar.timegm(time.gmtime())
+print(ts)
+
+#firebase upload
+
 myFirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/')
-postdata = myFirebase.post ('/SensorData',{'xAxis':str(xMag),'yAxis':str(yMag), 'zAxis':str(zMag)})
+postdata = myFirebase.post ('/SensorData',{'xAxis':str(xMag),'yAxis':str(yMag), 'zAxis':str(zMag), 'timestamp':str(ts)})
 print ("The data is uploaded to the database");
