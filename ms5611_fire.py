@@ -1,4 +1,5 @@
 import smbus
+import calendar
 import time
 import json
 from firebase import firebase
@@ -92,6 +93,12 @@ print "Pressure : %.2f mbar" %pressure
 print "Temperature in Celsius : %.2f C" %cTemp
 print "Temperature in Fahrenheit : %.2f F" %fTemp
 
+#timestamp 
+ts = calendar.timegm(time.gmtime())
+print (ts)
+
+#firebase data
+
 myfirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/')
-result = myfirebase.post('Reading',{'valuer':str(pressure),'temp':str(cTemp)})
+result = myfirebase.post('Reading',{'valuer':str(pressure),'temp':str(cTemp), 'timestamp':str(ts)})
 print ("The data is uploaded to the database");
