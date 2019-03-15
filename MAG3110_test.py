@@ -51,6 +51,6 @@ print(ts)
 
 #firebase upload
 
-myFirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/')
-postdata = myFirebase.post ('/SensorData',{'xAxis':str(xMag),'yAxis':str(yMag), 'zAxis':str(zMag), 'timestamp':str(ts)})
+myFirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/user/JfBAaC6vvQQKHN7JhGMRDY8yXS72/')
+postdata = myFirebase.post ('Motion',{'valuer':str(xMag),'yAxis':str(yMag), 'zAxis':str(zMag), 'timestamp':str(ts)})
 print ("The data is uploaded to the database");
