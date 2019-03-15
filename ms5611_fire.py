@@ -3,6 +3,7 @@ import calendar
 import time
 import json
 from firebase import firebase
+
 # Get I2C bus
 bus = smbus.SMBus(1)
 
@@ -99,6 +100,6 @@ print (ts)
 
 #firebase data
 
-myfirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/')
-result = myfirebase.post('Reading',{'valuer':str(pressure),'temp':str(cTemp), 'timestamp':str(ts)})
+myfirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/user/JfBAaC6vvQQKHN7JhGMRDY8yXS72/')
+result = myfirebase.post('Reading',{'valuer':str(pressure),'timestamp':str(ts)})
 print ("The data is uploaded to the database");
