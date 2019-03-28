@@ -43,8 +43,11 @@ if zMag > 32767 :
 print "Magnetic field in X-Axis : %d" %xMag
 print "Magnetic field in Y-Axis : %d" %yMag
 print "Magnetic field in Z-Axis : %d" %zMag
-
-
+xaxis = str(xMag)
+yaxis = str(yMag)
+zaxis = str(zMag)
+final = ( ' x   ' + xaxis + ' ,  y   ' + yaxis + ' ,  z  ' + zaxis)
+print (final)
 #Time in EPOCH
 ts = calendar.timegm(time.gmtime())
 print(ts)
@@ -52,5 +55,5 @@ print(ts)
 #firebase upload
 
 myFirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/user/JfBAaC6vvQQKHN7JhGMRDY8yXS72/')
-postdata = myFirebase.post ('Motion',{'valuer':str(xMag),'yAxis':str(yMag), 'zAxis':str(zMag), 'timestamp':str(ts)})
+postdata = myFirebase.post ('Motion',{'valuer':str(final),'yAxis':str(yMag), 'zAxis':str(zMag), 'timestamp':str(ts)})
 print ("The data is uploaded to the database");

@@ -93,8 +93,6 @@ fTemp = cTemp * 1.8 + 32
 print "Pressure : %.2f mbar" %pressure
 print "Temperature in Celsius : %.2f C" %cTemp
 print "Temperature in Fahrenheit : %.2f F" %fTemp
-press = str(pressure)
-baro = (press + '  mbar ')
 
 #timestamp 
 ts = calendar.timegm(time.gmtime())
@@ -103,5 +101,5 @@ print (ts)
 #firebase data
 
 myfirebase = firebase.FirebaseApplication('https://sag-droninig-ceng319-project.firebaseio.com/user/JfBAaC6vvQQKHN7JhGMRDY8yXS72/')
-result = myfirebase.post('Reading',{'valuer':str(baro),'timestamp':str(ts)})
+result = myfirebase.post('Temperature',{'valuer':str(cTemp),'timestamp':str(ts)})
 print ("The data is uploaded to the database");
